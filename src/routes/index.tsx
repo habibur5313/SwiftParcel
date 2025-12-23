@@ -16,6 +16,7 @@ import { Home } from "@/pages/Home";
 import Error from "@/pages/Error";
 import { Contact } from "@/components/modules/Home/Contact";
 import { FAQ } from "@/components/modules/Home/Faq";
+import LocationMap from "@/components/modules/Home/LocationMap";
 
 
 export const router = createBrowserRouter([
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         Component: FAQ,
         path: "faq",
+      },
+      {
+        Component: LocationMap,
+        path: "locations",
       },
     ],
   },

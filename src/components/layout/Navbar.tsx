@@ -1,14 +1,4 @@
-
-
-
-//             <Link to="/" className="text-primary hover:text-primary/90">
-//               <div className="text-foreground flex gap-2 items-center">
-//                 <p className="hidden sm:block"><Logo/></p>
-//                 <h1 className="pacifico-regular sm:text-2xl text-xl font-medium sm:font-semibold">Delivery Express</h1>
-//               </div>
-//             </Link>  
-
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Package, Menu, X } from "lucide-react";
 import { Button } from "../ui/button";
 import {
@@ -171,12 +161,23 @@ export default function Navbar() {
               )}
             </div>
           ))}
-          <div className="flex flex-col gap-3 mt-2">
-            <Button variant="outline" className="w-full justify-center">
-              Sign In
+          <div className="flex items-center gap-2">
+          <ModeToggle />
+          {data?.data?.email && (
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              className="text-sm"
+            >
+              Logout
             </Button>
-            <Button className="w-full justify-center">Get Started</Button>
-          </div>
+          )}
+          {!data?.data?.email && (
+            <Button asChild className="text-sm">
+              <Link to="/login">Login</Link>
+            </Button>
+          )}
+        </div>
         </div>
       )}
     </header>

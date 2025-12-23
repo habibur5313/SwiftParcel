@@ -1,4 +1,3 @@
-import React from 'react'
 import { Package, Truck, MapPin, CheckCircle } from 'lucide-react'
 import { useInView } from '@/hooks/useInView'
 const steps = [
