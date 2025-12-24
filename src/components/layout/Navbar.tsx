@@ -1,11 +1,13 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Package, Menu, X } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Link } from "react-router";
 import {
@@ -17,11 +19,10 @@ import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants";
 import { ModeToggle } from "../mode.toggle";
 
-
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC" },
-  { href: "/parcels", label: "Parcels", role: "PUBLIC" },
+  { href: "/parcels", label: "parcels", role: "PUBLIC" },
   { href: "/about", label: "About", role: "PUBLIC" },
   { href: "/contact", label: "Contact", role: "PUBLIC" },
   { href: "/faq", label: "FAQ", role: "PUBLIC" },
@@ -67,7 +68,9 @@ export default function Navbar() {
             </div>
             <span
               className={`text-xl font-bold tracking-tight ${
-                isScrolled ? "text-slate-900 dark:text-slate-50" : "text-slate-900 dark:text-slate-50"
+                isScrolled
+                  ? "text-slate-900 dark:text-slate-50"
+                  : "text-slate-900 dark:text-slate-50"
               }`}
             >
               SwiftParcel
@@ -76,7 +79,8 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           {/* Navigation menu */}
-          <NavigationMenu className="max-md:hidden">
+          <div className="flex gap-0 items-center max-md:hidden">
+            <NavigationMenu className="">
             <NavigationMenuList className="gap-2">
               {navigationLinks.map((link, index) => (
                 <div key={index}>
@@ -105,24 +109,53 @@ export default function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
 
+          <NavigationMenu className="-ml-6">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-muted-foreground hover:text-primary py-1.5 font-medium">Dashboard</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink
+                    asChild
+                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                  >
+                    <Link to={"/"}>parcel create</Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink
+                    asChild
+                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                  >
+                    <Link to={"/"}>parcel create</Link>
+                  </NavigationMenuLink>
+                  <NavigationMenuLink
+                    asChild
+                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                  >
+                    <Link to={"/"}>parcel create</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          </div>
+
           {/* Right side */}
-        <div className="flex items-center gap-2">
-          <ModeToggle />
-          {data?.data?.email && (
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="text-sm"
-            >
-              Logout
-            </Button>
-          )}
-          {!data?.data?.email && (
-            <Button asChild className="text-sm">
-              <Link to="/login">Login</Link>
-            </Button>
-          )}
-        </div>
+          <div className="flex items-center gap-2">
+            <ModeToggle />
+            {data?.data?.email && (
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className="text-sm"
+              >
+                Logout
+              </Button>
+            )}
+            {!data?.data?.email && (
+              <Button asChild className="text-sm">
+                <Link to="/login">Login</Link>
+              </Button>
+            )}
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -163,22 +196,22 @@ export default function Navbar() {
             </div>
           ))}
           <div className="flex items-center gap-2">
-          <ModeToggle />
-          {data?.data?.email && (
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="text-sm"
-            >
-              Logout
-            </Button>
-          )}
-          {!data?.data?.email && (
-            <Button asChild className="text-sm">
-              <Link to="/login">Login</Link>
-            </Button>
-          )}
-        </div>
+            <ModeToggle />
+            {data?.data?.email && (
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className="text-sm"
+              >
+                Logout
+              </Button>
+            )}
+            {!data?.data?.email && (
+              <Button asChild className="text-sm">
+                <Link to="/login">Login</Link>
+              </Button>
+            )}
+          </div>
         </div>
       )}
     </header>

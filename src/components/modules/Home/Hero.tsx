@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Search,
@@ -8,58 +8,94 @@ import {
   Globe,
   Shield,
   Zap,
-} from 'lucide-react'
-import { Button } from '@/components/ui/button'
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import type { IParcel } from "@/types";
+import { useGetParcelByTrackingIdQuery } from "@/redux/features/Parcel/parcel.api";
+import { role } from "@/constants";
+import { toast } from "sonner";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 const slides = [
   {
     id: 1,
     icon: Zap,
-    headline: 'Lightning Fast Delivery',
+    headline: "Lightning Fast Delivery",
     subtext:
-      'Experience the speed of our express network. Same-day delivery available in major cities.',
-    bgClass: 'bg-blue-50',
-    accentColor: 'text-blue-600',
-    iconBg: 'bg-blue-100',
+      "Experience the speed of our express network. Same-day delivery available in major cities.",
+    bgClass: "bg-blue-50",
+    accentColor: "text-blue-600",
+    iconBg: "bg-blue-100",
   },
   {
     id: 2,
     icon: Globe,
-    headline: 'Global Reach, Local Care',
+    headline: "Global Reach, Local Care",
     subtext:
-      'Shipping to over 150 countries with seamless customs handling and real-time tracking.',
-    bgClass: 'bg-indigo-50',
-    accentColor: 'text-indigo-600',
-    iconBg: 'bg-indigo-100',
+      "Shipping to over 150 countries with seamless customs handling and real-time tracking.",
+    bgClass: "bg-indigo-50",
+    accentColor: "text-indigo-600",
+    iconBg: "bg-indigo-100",
   },
   {
     id: 3,
     icon: Shield,
-    headline: 'Secure & Insured Handling',
+    headline: "Secure & Insured Handling",
     subtext:
-      'Your parcels are protected every step of the way with our comprehensive insurance coverage.',
-    bgClass: 'bg-amber-50',
-    accentColor: 'text-amber-600',
-    iconBg: 'bg-amber-100',
+      "Your parcels are protected every step of the way with our comprehensive insurance coverage.",
+    bgClass: "bg-amber-50",
+    accentColor: "text-amber-600",
+    iconBg: "bg-amber-100",
   },
-]
+];
 export function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
+  const [trackingId, setTrackingId] = useState("");
+  const [submittedId, setSubmittedId] = useState<string | null>(null);
+
+  const {
+    data: parcels,
+    isFetching,
+    isError,
+  } = useGetParcelByTrackingIdQuery(submittedId!, {
+    skip: !submittedId,
+  });
+
+  const { data: userData } = useUserInfoQuery(undefined);
+
+
+  const handleTrack = () => {
+    if (trackingId.trim()) {
+      setSubmittedId(trackingId.trim());
+    }
+  };
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   useEffect(() => {
-    if (isPaused) return
+    if (isPaused) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [isPaused])
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+
+
+  const handleSendParcel = () => {
+    if (userData?.data.role === role.Sender) {
+      window.location.href = "/sender/parcel-request";
+    } else {
+      toast.error("You must be logged in as a sender to send a parcel.");
+    }
+  };
   return (
-    <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-white dark:bg-slate-900">
+    <section className="relative p-16 overflow-hidden bg-white dark:bg-slate-900">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-50" />
@@ -93,7 +129,11 @@ export function Hero() {
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
-                className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-in-out transform ${index === currentSlide ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-8 scale-95 pointer-events-none'}`}
+                className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-in-out transform ${
+                  index === currentSlide
+                    ? "opacity-100 translate-x-0 scale-100"
+                    : "opacity-0 translate-x-8 scale-95 pointer-events-none"
+                }`}
               >
                 <div
                   className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${slide.iconBg} ${slide.accentColor} text-sm font-medium mb-6`}
@@ -106,19 +146,25 @@ export function Hero() {
                   {index === 0 && (
                     <>
                       Reliable Shipping for <br className="hidden md:block" />
-                      <span className="text-blue-600 dark:text-blue-400">Global Business</span>
+                      <span className="text-blue-600 dark:text-blue-400">
+                        Global Business
+                      </span>
                     </>
                   )}
                   {index === 1 && (
                     <>
                       Connect with the <br className="hidden md:block" />
-                      <span className="text-indigo-600 dark:text-indigo-400">Whole World</span>
+                      <span className="text-indigo-600 dark:text-indigo-400">
+                        Whole World
+                      </span>
                     </>
                   )}
                   {index === 2 && (
                     <>
                       Safety First for <br className="hidden md:block" />
-                      <span className="text-amber-600 dark:text-amber-400">Every Parcel</span>
+                      <span className="text-amber-600 dark:text-amber-400">
+                        Every Parcel
+                      </span>
                     </>
                   )}
                 </h1>
@@ -136,7 +182,11 @@ export function Hero() {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'w-8 bg-blue-600 dark:bg-blue-400' : 'w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600'}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide
+                    ? "w-8 bg-blue-600 dark:bg-blue-400"
+                    : "w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 dark:hover:bg-slate-600"
+                }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
@@ -144,6 +194,7 @@ export function Hero() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
             <Button
+              onClick={handleSendParcel}
               size="lg"
               className="w-full sm:w-auto h-12 px-8 text-base shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 transition-all hover:-translate-y-0.5"
             >
@@ -164,9 +215,63 @@ export function Hero() {
             <input
               type="text"
               placeholder="Enter tracking number..."
+              value={trackingId}
+              onChange={(e) => setTrackingId(e.target.value)}
               className="flex-1 px-4 py-2 outline-none text-slate-700 dark:text-slate-300 placeholder:text-slate-400 dark:placeholder:text-slate-500"
             />
-            <Button size="sm">Track</Button>
+            <Button onClick={handleTrack} size="sm">
+              Track
+            </Button>
+          </div>
+          {/* Results */}
+          <div className="mt-8 w-full max-w-2xl mx-auto">
+            {isFetching && (
+              <p className="text-sm text-muted-foreground">Loading...</p>
+            )}
+            {isError && (
+              <p className="text-sm text-red-500">No parcel found.</p>
+            )}
+            {parcels &&
+              parcels.map((parcel: IParcel) => (
+                <Card key={parcel._id} className="mt-4">
+                  <CardContent className="p-4 text-left">
+                    <h3 className="font-semibold text-lg">
+                      {parcel.name} ({parcel.trackingId})
+                    </h3>
+                    <p>
+                      Status:{" "}
+                      <span className="font-medium">{parcel.status}</span>
+                    </p>
+                    <p>Cost: ${parcel.cost}</p>
+                    <p>Weight: {parcel.weight}kg</p>
+                    <p>
+                      Pickup: {new Date(parcel.pickUpDate).toLocaleDateString()}
+                    </p>
+                    <p>
+                      Estimated Delivery:{" "}
+                      {new Date(
+                        parcel.estimatedDeliveryDate
+                      ).toLocaleDateString()}
+                    </p>
+                    <div className="mt-2">
+                      <p className="font-semibold">Sender Info:</p>
+                      <p>
+                        {parcel.senderInfo.division}, {parcel.senderInfo.city},{" "}
+                        {parcel.senderInfo.zip}, {parcel.senderInfo.street}
+                      </p>
+                    </div>
+                    <div className="mt-2">
+                      <p className="font-semibold">Delivery Location:</p>
+                      <p>
+                        {parcel.deliveryLocation.division},{" "}
+                        {parcel.deliveryLocation.city},{" "}
+                        {parcel.deliveryLocation.zip},{" "}
+                        {parcel.deliveryLocation.street}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
           </div>
         </div>
       </div>
@@ -179,5 +284,5 @@ export function Hero() {
         <ArrowRight className="h-4 w-4 rotate-90" />
       </div>
     </section>
-  )
+  );
 }
