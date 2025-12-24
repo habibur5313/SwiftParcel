@@ -80,7 +80,7 @@ export function RegisterForm({
       {/* Heading */}
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold text-primary">
-          Create your Delivery Express account
+          Create your SwiftParcel account
         </h1>
         <p className="text-sm text-muted-foreground">
           Sign up to manage and track your parcels with ease

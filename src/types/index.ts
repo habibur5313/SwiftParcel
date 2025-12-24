@@ -183,6 +183,7 @@ export type UserResponse = {
 
 export interface IParcelResponse {
   isLoading: boolean;
+  isError: boolean;
   data: ParcelResponse
 }
 

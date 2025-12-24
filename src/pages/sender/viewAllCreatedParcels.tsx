@@ -1,14 +1,27 @@
 import { ParcelCard } from "@/components/modules/Parcel/ParcelCard";
+import { ParcelsPageSkeleton } from "@/components/modules/skeleton/ParcelsPageSkeleton";
 import { useGetParcelsQuery } from "@/redux/features/Parcel/parcel.api";
 import { useEffect } from "react";
 
 export default function ViewAllCreatedParcels  ()  {
     useEffect(() => {
-        document.title = "Dashboard | Delivery Express ";
+        document.title = "Dashboard | SwiftParcel ";
       }, []);
   const { data: parcels, isLoading, error } = useGetParcelsQuery();
 
-  if (isLoading) return <div>Loading parcels...</div>;
+if (isLoading) {
+    // Optionally toggle action button skeletons based on pathname
+    const pathname = window.location.pathname;
+    const showCancelButton = pathname === "/sender/cancel-parcel";
+    const showConfirmButton = pathname === "/receiver/confirm-parcels";
+
+    return (
+      <ParcelsPageSkeleton
+        showCancelButton={showCancelButton}
+        showConfirmButton={showConfirmButton}
+      />
+    );
+  }
   if (error) return <div>Error loading parcels</div>;
   return (
     <div>

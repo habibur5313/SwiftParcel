@@ -14,9 +14,10 @@ import { senderSidebarItems } from "./senderSidebarItems";
 import { receiverSidebarItems } from "./receiverSidebarItems";
 import { Home } from "@/pages/Home";
 import Error from "@/pages/Error";
-import { Contact } from "@/components/modules/Home/Contact";
-import { FAQ } from "@/components/modules/Home/Faq";
 import LocationMap from "@/components/modules/Home/LocationMap";
+import ContactPage from "@/pages/Contact";
+import FaqPage from "@/pages/Faq";
+import ParcelsPage from "@/pages/Parcels";
 
 
 export const router = createBrowserRouter([
@@ -29,15 +30,19 @@ export const router = createBrowserRouter([
         path: "",
       },
       {
+        Component: ParcelsPage,
+        path: "parcels",
+      },
+      {
         Component: About,
         path: "about",
       },
       {
-        Component: Contact,
+        Component: ContactPage,
         path: "contact",
       },
       {
-        Component: FAQ,
+        Component: FaqPage,
         path: "faq",
       },
       {

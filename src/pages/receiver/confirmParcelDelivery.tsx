@@ -1,4 +1,5 @@
 import { ParcelCard } from "@/components/modules/Parcel/ParcelCard";
+import { ParcelsPageSkeleton } from "@/components/modules/skeleton/ParcelsPageSkeleton";
 import {
   useConfirmDeliveryMutation,
   useGetIncomingParcelsQuery,
@@ -8,7 +9,7 @@ import { toast } from "sonner";
 
 const ConfirmParcelDelivery = () => {
      useEffect(() => {
-          document.title = "Dashboard | Delivery Express ";
+          document.title = "Dashboard | SwiftParcel ";
         }, []);
   const { data: incomingParcels, isLoading } = useGetIncomingParcelsQuery();
   const [confirmDelivery] = useConfirmDeliveryMutation();
@@ -28,7 +29,19 @@ const ConfirmParcelDelivery = () => {
     }
   };
 
-  if (isLoading) return <div>Loading parcels...</div>;
+if (isLoading) {
+    // Optionally toggle action button skeletons based on pathname
+    const pathname = window.location.pathname;
+    const showCancelButton = pathname === "/sender/cancel-parcel";
+    const showConfirmButton = pathname === "/receiver/confirm-parcels";
+
+    return (
+      <ParcelsPageSkeleton
+        showCancelButton={showCancelButton}
+        showConfirmButton={showConfirmButton}
+      />
+    );
+  }
 
   return (
     <div>

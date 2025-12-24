@@ -1,9 +1,22 @@
 import { ParcelCard } from "@/components/modules/Parcel/ParcelCard";
+import { ParcelsPageSkeleton } from "@/components/modules/skeleton/ParcelsPageSkeleton";
 import { useGetIncomingParcelsQuery } from "@/redux/features/Parcel/parcel.api";
 
 const ViewIncomingParcels = () => {
   const {data: incomingParcels,isLoading} = useGetIncomingParcelsQuery()
- if (isLoading) return <div>Loading parcels...</div>;
+if (isLoading) {
+    // Optionally toggle action button skeletons based on pathname
+    const pathname = window.location.pathname;
+    const showCancelButton = pathname === "/sender/cancel-parcel";
+    const showConfirmButton = pathname === "/receiver/confirm-parcels";
+
+    return (
+      <ParcelsPageSkeleton
+        showCancelButton={showCancelButton}
+        showConfirmButton={showConfirmButton}
+      />
+    );
+  }
 
   return (
     <div>

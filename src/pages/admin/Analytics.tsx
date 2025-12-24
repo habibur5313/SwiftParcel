@@ -33,14 +33,14 @@ const COLORS = ["#22c55e", "#eab308", "#3b82f6", "#ef4444"];
 
 export default function Analytics() {
   useEffect(() => {
-    document.title = "Dashboard | Delivery Express";
+    document.title = "Dashboard | SwiftParcel";
   }, []);
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6">
       {/* Page Title */}
       <h1 className="text-xl sm:text-2xl font-bold text-center md:text-left">
-        Delivery Express Analytics
+        SwiftParcel Analytics
       </h1>
 
       {/* Stats Cards */}

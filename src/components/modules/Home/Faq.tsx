@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    question: 'How do I send a parcel with Delivery Express?',
+    question: 'How do I send a parcel with SwiftParcel?',
     answer:
       "Simply create an account, fill in the sender and receiver details, choose your delivery option, and confirm your booking.A courier will pick up your parcel from your location.",
   },

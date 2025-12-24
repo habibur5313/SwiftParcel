@@ -54,7 +54,7 @@ import z from "zod";
 
 export default function CreateParcelPage() {
   useEffect(() => {
-    document.title = "Dashboard | Delivery Express ";
+    document.title = "Dashboard | SwiftParcel ";
   }, []);
   const { data } = useUserInfoQuery(undefined);
   const [getUserByEmail] = useLazyGetUserByEmailQuery();

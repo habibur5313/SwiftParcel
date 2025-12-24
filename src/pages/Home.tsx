@@ -17,7 +17,7 @@ import { useEffect } from "react";
 
 export const Home = () => {
       useEffect(() => {
-      document.title = "Home | Delivery Express ";
+      document.title = "Home | SwiftParcel ";
     }, []);
   return (
     // <div>

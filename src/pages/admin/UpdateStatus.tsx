@@ -37,7 +37,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 
 const UpdateStatus = () => {
   useEffect(() => {
-    document.title = "Dashboard | Delivery Express";
+    document.title = "Dashboard | SwiftParcel";
   }, []);
 
   const [page, setPage] = useState(1);

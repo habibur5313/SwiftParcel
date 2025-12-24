@@ -31,7 +31,7 @@ import { roleOptions } from "@/constants";
 
 const ManageAllUsers = () => {
   useEffect(() => {
-    document.title = "Dashboard | Delivery Express ";
+    document.title = "Dashboard | SwiftParcel ";
   }, []);
   const [toggleStatus] = useToggleUserStatusMutation();
   const [page, setPage] = useState(1);

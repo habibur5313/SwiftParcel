@@ -11,7 +11,7 @@ const viewAllCreatedParcels = lazy(
 
 export const senderSidebarItems: ISidebarItem[] = [
   {
-    title: "Delivery express",
+    title: "SwiftParcel",
     items: [
       {
         title: "Create parcel delivery request",

@@ -56,7 +56,7 @@ export function LoginForm({
       {/* Heading */}
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold text-primary">
-          Login to Delivery Express
+          Login to SwiftParcel
         </h1>
         <p className="text-sm text-muted-foreground">
           Enter your credentials to access your account

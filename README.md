@@ -1,11 +1,11 @@
 
 ---
 
-# **Delivery Express – Parcel Delivery Frontend**
+# **SwiftParcel – Parcel Delivery Frontend**
 
-**Live Demo:** [https://deliveryexpress.vercel.app](https://deliveryexpress.vercel.app)
+**Live Demo:** [https://swiftparcel.vercel.app](https://swiftparcel.vercel.app)
 
-**Frontend Repository:** [GitHub Client](https://github.com/habibur5313/Delivery-Express-Frontend)
+**Frontend Repository:** [GitHub Client](https://github.com/habibur5313/SwiftParcel)
 
 **Backend Repository:** [GitHub Backend](https://github.com/habibur5313/parcel-delivery-system-backend)
 
@@ -15,7 +15,7 @@
 
 ## **Project Overview**
 
-*Delivery Express* is a secure, role-based, and user-friendly frontend application for a Parcel Delivery System, built with **React.js**, **Redux Toolkit**, and **RTK Query**.
+*SwiftParcel* is a secure, role-based, and user-friendly frontend application for a Parcel Delivery System, built with **React.js**, **Redux Toolkit**, and **RTK Query**.
 
 The app interacts with a REST API backend to enable **Senders**, **Receivers**, and **Admins** to perform parcel operations, manage records, and track shipments efficiently. The UI is fully responsive, clean, and modern using **Tailwind CSS**.
 

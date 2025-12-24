@@ -11,7 +11,7 @@ import { toast } from "sonner";
 
 export const Contact = () => {
     useEffect(() => {
-        document.title = "Contact | Delivery Express ";
+        document.title = "Contact | SwiftParcel ";
       }, []);
   const [formData, setFormData] = useState({
     name: '',

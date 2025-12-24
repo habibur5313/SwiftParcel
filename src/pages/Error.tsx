@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 
 const Error = () => {
   useEffect(() => {
-    document.title = "Error | Delivery express";
+    document.title = "Error | SwiftParcel";
   }, []);
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">

@@ -14,7 +14,7 @@ import { Categories } from "@/components/modules/Home/Categories";
 
 export const About = () => {
     useEffect(() => {
-        document.title = "About | Delivery Express ";
+        document.title = "About | SwiftParcel ";
       }, []);
   const { pathname } = useLocation();
 
@@ -39,7 +39,7 @@ export const About = () => {
       role: "Tech Lead",
       image:
         "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=300&h=300&fit=crop&crop=face",
-      bio: "Full-stack developer leading the technology powering Delivery Express’ platform.",
+      bio: "Full-stack developer leading the technology powering SwiftParcel’ platform.",
     },
   ];
 
@@ -117,7 +117,7 @@ export const About = () => {
         <section className="py-20 bg-blue-600 text-white text-center">
           <Zap className="h-16 w-16 mx-auto mb-6 text-yellow-300" />
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Ship with Delivery Express?
+            Ready to Ship with SwiftParcel?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/parcels">

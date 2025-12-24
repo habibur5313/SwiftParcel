@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 export default function Unauthorized() {
      useEffect(() => {
-          document.title = "Dashboard | Delivery Express ";
+          document.title = "Dashboard | SwiftParcel ";
         }, []);
   return (
     <div>

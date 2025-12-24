@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export default function Login() {
     useEffect(() => {
-        document.title = "Login | Delivery Express ";
+        document.title = "Login | SwiftParcel ";
       }, []);
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
@@ -16,7 +16,7 @@ export default function Login() {
         <div className="flex justify-center gap-2 md:justify-start">
           <Link to="/" className="flex items-center gap-2 font-bold text-xl">
             <Logo />
-            <span className="hidden sm:inline">Delivery Express</span>
+            <span className="hidden sm:inline">SwiftParcel</span>
           </Link>
         </div>
 
@@ -32,14 +32,14 @@ export default function Login() {
       <div className="relative hidden bg-muted lg:block">
         <img
           src={deliveryLogin}
-          alt="Delivery Express Login Illustration"
+          alt="SwiftParcel Login Illustration"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.8]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-background/20" />
         <div className="absolute bottom-10 left-10 text-white space-y-2">
           <h2 className="text-3xl font-bold">Track • Manage • Deliver</h2>
           <p className="max-w-xs text-sm text-gray-200">
-            Access your Delivery Express account to stay updated on every parcel.
+            Access your SwiftParcel account to stay updated on every parcel.
           </p>
         </div>
       </div>
