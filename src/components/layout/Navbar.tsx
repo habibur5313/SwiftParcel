@@ -45,6 +45,8 @@ export default function Navbar() {
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
 
+  console.log(data)
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -118,6 +120,14 @@ export default function Navbar() {
                           asChild
                           className="text-muted-foreground hover:text-primary py-1.5 font-medium"
                         >
+                          <Link to={"/sender/profile"}>
+                            My Profile
+                          </Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
                           <Link to={"/sender/parcel-request"}>
                             parcel request
                           </Link>
@@ -154,6 +164,14 @@ export default function Navbar() {
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[200px] ">
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/receiver/profile"}>
+                            My Profile
+                          </Link>
+                        </NavigationMenuLink>
                         <NavigationMenuLink
                           asChild
                           className="text-muted-foreground hover:text-primary py-1.5 font-medium"
@@ -199,6 +217,14 @@ export default function Navbar() {
                           className="text-muted-foreground hover:text-primary py-1.5 font-medium"
                         >
                           <Link to={"/admin/analytics"}>analytics</Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/admin/profile"}>
+                            My Profile
+                          </Link>
                         </NavigationMenuLink>
                         <NavigationMenuLink
                           asChild
@@ -300,6 +326,7 @@ export default function Navbar() {
                     <NavigationMenuTrigger>Dashboard</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid gap-2 p-4 w-[220px]">
+                        <Link to="/sender/profile">My Profile</Link>
                         <Link to="/sender/parcel-request">Parcel Request</Link>
                         <Link to="/sender/cancel-parcel">Cancel Parcel</Link>
                         <Link to="/sender/all-created-parcels">
@@ -320,6 +347,9 @@ export default function Navbar() {
                     <NavigationMenuTrigger>Dashboard</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid gap-2 p-4 w-[220px]">
+                        <Link to="/receiver/profile">
+                          My Profile
+                        </Link>
                         <Link to="/receiver/incoming-parcels">
                           Incoming Parcels
                         </Link>
@@ -345,6 +375,7 @@ export default function Navbar() {
                     <NavigationMenuContent>
                       <ul className="grid gap-2 p-4 w-[220px]">
                         <Link to="/admin/analytics">Analytics</Link>
+                        <Link to="/admin/profile">My Profile</Link>
                         <Link to="/admin/all-users">Users</Link>
                         <Link to="/admin/parcels">Parcels</Link>
                         <Link to="/admin/update-status">
