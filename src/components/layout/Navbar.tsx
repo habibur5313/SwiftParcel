@@ -18,6 +18,12 @@ import {
 import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants";
 import { ModeToggle } from "../mode.toggle";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "../ui/sheet";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -81,65 +87,149 @@ export default function Navbar() {
           {/* Navigation menu */}
           <div className="flex gap-0 items-center max-md:hidden">
             <NavigationMenu className="">
-            <NavigationMenuList className="gap-2">
-              {navigationLinks.map((link, index) => (
-                <div key={index}>
-                  {link.role === "PUBLIC" && (
-                    <NavigationMenuItem key={index}>
-                      <NavigationMenuLink
-                        asChild
-                        className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                      >
-                        <Link to={link.href}>{link.label}</Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  )}
-                  {link.role === data?.data?.role && (
-                    <NavigationMenuItem key={index}>
-                      <NavigationMenuLink
-                        asChild
-                        className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                      >
-                        <Link to={link.href}>{link.label}</Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  )}
-                </div>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+              <NavigationMenuList className="gap-2">
+                {navigationLinks.map((link, index) => (
+                  <div key={index}>
+                    {link.role === "PUBLIC" && (
+                      <NavigationMenuItem key={index}>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={link.href}>{link.label}</Link>
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    )}
+                  </div>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
 
-          <NavigationMenu className="-ml-6">
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-muted-foreground hover:text-primary py-1.5 font-medium">Dashboard</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <NavigationMenuLink
-                    asChild
-                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                  >
-                    <Link to={"/"}>parcel create</Link>
-                  </NavigationMenuLink>
-                  <NavigationMenuLink
-                    asChild
-                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                  >
-                    <Link to={"/"}>parcel create</Link>
-                  </NavigationMenuLink>
-                  <NavigationMenuLink
-                    asChild
-                    className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                  >
-                    <Link to={"/"}>parcel create</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+            {data?.data?.role === role.Sender && (
+              <NavigationMenu className="-ml-6">
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-muted-foreground hover:text-primary py-1.5 font-medium">
+                      Dashboard
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[200px] ">
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/sender/parcel-request"}>
+                            parcel request
+                          </Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/sender/cancel-parcel"}>
+                            cancel parcel
+                          </Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/sender/all-created-parcels"}>
+                            created parcels
+                          </Link>
+                        </NavigationMenuLink>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            )}
+
+            {data?.data?.role === role.Receiver && (
+              <NavigationMenu className="-ml-6">
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-muted-foreground hover:text-primary py-1.5 font-medium">
+                      Dashboard
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[200px] ">
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/receiver/incoming-parcels"}>
+                            incoming parcel
+                          </Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/receiver/confirm-parcels"}>
+                            confirm parcel
+                          </Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/receiver/delivery-history"}>
+                            delivery history
+                          </Link>
+                        </NavigationMenuLink>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            )}
+
+            {data?.data?.role === role.Admin && (
+              <NavigationMenu className="-ml-6">
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-muted-foreground hover:text-primary py-1.5 font-medium">
+                      Dashboard
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[200px] ">
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/admin/analytics"}>analytics</Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/admin/all-users"}>users</Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/admin/parcels"}>parcels</Link>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={"/admin/update-status"}>
+                            update parcel status
+                          </Link>
+                        </NavigationMenuLink>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            )}
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-2">
+          <div className="items-center gap-2 hidden md:flex">
             <ModeToggle />
             {data?.data?.email && (
               <Button
@@ -173,47 +263,123 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-100 shadow-lg p-4 flex flex-col gap-4 animate-in slide-in-from-top-5">
-          {navigationLinks.map((link, index) => (
-            <div key={index}>
-              {link.role === "PUBLIC" && (
-                <Link
-                  to={link.href}
-                  className="text-slate-900 text-sm font-medium hover:text-blue-600 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              )}
-              {link.role === data?.data?.role && (
-                <Link
-                  to={link.href}
-                  className="text-slate-900 text-sm font-medium hover:text-blue-600 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              )}
-            </div>
-          ))}
-          <div className="flex items-center gap-2">
+      <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        {/* Mobile Menu Button */}
+
+        {/* Drawer */}
+        <SheetContent
+          side="right"
+          className="w-[75%] sm:max-w-sm md:hidden bg-background text-foreground"
+        >
+          <SheetHeader>
+            <SheetTitle className="text-lg font-semibold">Menu</SheetTitle>
+          </SheetHeader>
+
+          {/* Content */}
+          <div className="mt-6 flex flex-col gap-5">
+            {/* Public Links */}
+            {navigationLinks.map(
+              (link, index) =>
+                link.role === "PUBLIC" && (
+                  <Link
+                    key={index}
+                    to={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-sm font-medium hover:text-primary transition"
+                  >
+                    {link.label}
+                  </Link>
+                )
+            )}
+
+            {/* ================= Sender ================= */}
+            {data?.data?.role === role.Sender && (
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>Dashboard</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-2 p-4 w-[220px]">
+                        <Link to="/sender/parcel-request">Parcel Request</Link>
+                        <Link to="/sender/cancel-parcel">Cancel Parcel</Link>
+                        <Link to="/sender/all-created-parcels">
+                          Created Parcels
+                        </Link>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            )}
+
+            {/* ================= Receiver ================= */}
+            {data?.data?.role === role.Receiver && (
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>Dashboard</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-2 p-4 w-[220px]">
+                        <Link to="/receiver/incoming-parcels">
+                          Incoming Parcels
+                        </Link>
+                        <Link to="/receiver/confirm-parcels">
+                          Confirm Parcel
+                        </Link>
+                        <Link to="/receiver/delivery-history">
+                          Delivery History
+                        </Link>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            )}
+
+            {/* ================= Admin ================= */}
+            {data?.data?.role === role.Admin && (
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>Dashboard</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid gap-2 p-4 w-[220px]">
+                        <Link to="/admin/analytics">Analytics</Link>
+                        <Link to="/admin/all-users">Users</Link>
+                        <Link to="/admin/parcels">Parcels</Link>
+                        <Link to="/admin/update-status">
+                          Update Parcel Status
+                        </Link>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="mt-auto pt-6 border-t flex gap-3">
             <ModeToggle />
-            {data?.data?.email && (
+            {data?.data?.email ? (
               <Button
-                onClick={handleLogout}
+                onClick={() => {
+                  handleLogout();
+                  setIsMobileMenuOpen(false);
+                }}
                 variant="outline"
-                className="text-sm"
+                className="w-full"
               >
                 Logout
               </Button>
-            )}
-            {!data?.data?.email && (
-              <Button asChild className="text-sm">
+            ) : (
+              <Button asChild className="w-full">
                 <Link to="/login">Login</Link>
               </Button>
             )}
           </div>
-        </div>
-      )}
+        </SheetContent>
+      </Sheet>
     </header>
   );
 }

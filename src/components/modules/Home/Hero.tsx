@@ -95,7 +95,7 @@ export function Hero() {
     }
   };
   return (
-    <section className="relative p-16 overflow-hidden bg-white dark:bg-slate-900">
+    <section className="relative py-16 sm:p-16 overflow-hidden bg-white dark:bg-slate-900">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-50" />
