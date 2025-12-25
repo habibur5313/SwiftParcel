@@ -51,6 +51,21 @@ export function LoginForm({
     }
   };
 
+  console.log({ email: config.admin_email, password: config.admin_pass })
+
+
+  const handleDemoAdminLogin = async () => {
+    onSubmit({ email: config.admin_email, password: config.admin_pass });
+  };
+
+  const handleReceiverLogin = async () => {
+    onSubmit({ email: config.receiver_email, password: config.receiver_pass });
+  };
+
+  const handleSenderLogin = async () => {
+    onSubmit({ email: config.sender_email, password: config.sender_pass });
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       {/* Heading */}
@@ -61,6 +76,33 @@ export function LoginForm({
         <p className="text-sm text-muted-foreground">
           Enter your credentials to access your account
         </p>
+      </div>
+
+      <div className="flex flex-wrap items-center justify-center gap-2">
+       <Button
+       onClick={handleSenderLogin}
+              type="submit"
+              className=" bg-primary hover:bg-primary/90"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Demo Sender"}
+            </Button>
+       <Button
+       onClick={handleReceiverLogin}
+              type="submit"
+              className=" bg-primary hover:bg-primary/90"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Demo Receiver"}
+            </Button>
+       <Button
+       onClick={handleDemoAdminLogin}
+              type="submit"
+              className=" bg-primary hover:bg-primary/90"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Demo Admin"}
+            </Button>
       </div>
 
       {/* Form */}
