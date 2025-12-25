@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -40,19 +41,18 @@ export function LoginForm({
     try {
       const res = await login(data).unwrap();
 
+      console.log(res.data.user.role);
+
       if (res.success) {
         toast.success("Welcome back 🚚");
+
         navigate("/");
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error("Login Error:", err);
       toast.error(err.data?.message || "Login failed. Please try again.");
     }
   };
-
-  console.log({ email: config.admin_email, password: config.admin_pass })
-
 
   const handleDemoAdminLogin = async () => {
     onSubmit({ email: config.admin_email, password: config.admin_pass });
@@ -65,6 +65,50 @@ export function LoginForm({
   const handleSenderLogin = async () => {
     onSubmit({ email: config.sender_email, password: config.sender_pass });
   };
+
+  //   const loginHandler = async (data: FieldValues) => {
+  //   try {
+  //     const res = await login(data).unwrap();
+
+  //     const role = res?.data?.user?.role;
+
+  //     toast.success("Welcome back 🚚");
+
+  //     if (role === "ADMIN") {
+  //       navigate("/admin", { replace: true });
+  //     } else if (role === "SENDER") {
+  //       navigate("/sender/profile", { replace: true });
+  //     } else if (role === "RECEIVER") {
+  //       navigate("/receiver/profile", { replace: true });
+  //     } else {
+  //       navigate("/", { replace: true });
+  //     }
+  //   } catch (err: any) {
+  //     console.error("Login Error:", err);
+  //     toast.error(err.data?.message || "Login failed. Please try again.");
+  //   }
+  // };
+  // const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  //   loginHandler(data);
+  // };
+  // const handleDemoAdminLogin = () => {
+  //   loginHandler({
+  //     email: config.admin_email,
+  //     password: config.admin_pass,
+  //   });
+  // };
+  // const handleReceiverLogin = () => {
+  //   loginHandler({
+  //     email: config.receiver_email,
+  //     password: config.receiver_pass,
+  //   });
+  // };
+  // const handleSenderLogin = () => {
+  //   loginHandler({
+  //     email: config.sender_email,
+  //     password: config.sender_pass,
+  //   });
+  // };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -79,30 +123,30 @@ export function LoginForm({
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-2">
-       <Button
-       onClick={handleSenderLogin}
-              type="submit"
-              className=" bg-primary hover:bg-primary/90"
-              disabled={isLoading}
-            >
-              {isLoading ? "Loading..." : "Demo Sender"}
-            </Button>
-       <Button
-       onClick={handleReceiverLogin}
-              type="submit"
-              className=" bg-primary hover:bg-primary/90"
-              disabled={isLoading}
-            >
-              {isLoading ? "Loading..." : "Demo Receiver"}
-            </Button>
-       <Button
-       onClick={handleDemoAdminLogin}
-              type="submit"
-              className=" bg-primary hover:bg-primary/90"
-              disabled={isLoading}
-            >
-              {isLoading ? "Loading..." : "Demo Admin"}
-            </Button>
+        <Button
+          onClick={handleSenderLogin}
+          type="submit"
+          className=" bg-primary hover:bg-primary/90"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Demo Sender"}
+        </Button>
+        <Button
+          onClick={handleReceiverLogin}
+          type="submit"
+          className=" bg-primary hover:bg-primary/90"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Demo Receiver"}
+        </Button>
+        <Button
+          onClick={handleDemoAdminLogin}
+          type="submit"
+          className=" bg-primary hover:bg-primary/90"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Demo Admin"}
+        </Button>
       </div>
 
       {/* Form */}

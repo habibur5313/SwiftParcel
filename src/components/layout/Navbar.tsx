@@ -45,7 +45,6 @@ export default function Navbar() {
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
 
-  console.log(data)
 
   useEffect(() => {
     const handleScroll = () => {
