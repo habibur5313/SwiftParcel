@@ -114,7 +114,7 @@ export const ParcelCard: React.FC<ParcelCardProps> = ({
       </CardContent>
 
       <CardFooter className="flex justify-end gap-2">
-        <Button variant="outline" onClick={() => navigate(`/parcels/${parcel._id}`)}>
+        <Button className="cursor-pointer" variant="outline" onClick={() => navigate(`/parcels/${parcel._id}`)}>
           View Details
         </Button>
 

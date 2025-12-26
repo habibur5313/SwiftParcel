@@ -18,7 +18,7 @@ import LocationMap from "@/components/modules/Home/LocationMap";
 import ContactPage from "@/pages/Contact";
 import FaqPage from "@/pages/Faq";
 import ParcelsPage from "@/pages/Parcels";
-
+import ParcelDetailsPage from "@/pages/ParcelDetails";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +31,11 @@ export const router = createBrowserRouter([
       },
       {
         Component: ParcelsPage,
-        path: "parcels",
+        path: "parcels"
+      },
+      {
+        Component: ParcelDetailsPage,
+        path: "parcels/:id"
       },
       {
         Component: About,

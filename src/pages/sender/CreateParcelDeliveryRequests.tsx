@@ -105,7 +105,7 @@ export default function CreateParcelPage() {
 
       // 2️⃣ Role check
       if (res.data === null || res.data.role !== "RECEIVER") {
-        toast.error("Please provide a receiver email");
+        toast.error("Receiver not found!. Please provide a receiver email.");
         return;
       }
 

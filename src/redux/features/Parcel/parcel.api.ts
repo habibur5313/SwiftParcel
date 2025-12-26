@@ -45,6 +45,12 @@ export const parcelApi = baseApi.injectEndpoints({
       transformResponse: (response: any) => response.data,
     }),
 
+    // for all
+    getParcelById: builder.query<any[], string>({
+      query: (id: string) => ({ url: `/parcels/parcels/${id}`, method: "GET" }),
+      providesTags: ["PARCEL"],
+    }),
+
     // admin query
     getAllParcels: builder.query<any[], void>({
       query: () => ({ url: "/parcels/all-parcels", method: "GET" }),
@@ -98,6 +104,7 @@ export const {
   useConfirmDeliveryMutation,
   useGetDeliveredParcelsQuery,
   useGetAllParcelsQuery,
+  useGetParcelByIdQuery,
   useParcelsQuery,
   useBlockParcelMutation,
   useUnblockParcelMutation,
